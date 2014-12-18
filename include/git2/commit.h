@@ -286,6 +286,26 @@ GIT_EXTERN(int) git_commit_nth_gen_ancestor(
 GIT_EXTERN(int) git_commit_create(
 	git_oid *id,
 	git_repository *repo,
+	const git_signature *author,
+	const git_signature *committer,
+	const char *message_encoding,
+	const char *message,
+	const git_tree *tree,
+	size_t parent_count,
+	const git_commit *parents[]);
+
+/**
+ * Create a commit and update a reference
+ *
+ * @param update_ref reference to update with the new commit. The
+ * current tip of the reference must be the first commit in the parent
+ * list.
+ *
+ * @see git_commit_create
+ */
+GIT_EXTERN(int) git_commit_create_on(
+	git_oid *id,
+	git_repository *repo,
 	const char *update_ref,
 	const git_signature *author,
 	const git_signature *committer,
